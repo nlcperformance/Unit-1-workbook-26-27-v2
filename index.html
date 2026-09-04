@@ -1,0 +1,1714 @@
+<!DOCTYPE html>
+<html lang="en" class="h-full bg-slate-100">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Unit 1: Anatomy & Physiology - Master Learner & Revision Workbook</title>
+    <!-- Tailwind CSS CDN -->
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        btec: {
+                            blue: '#00539B',
+                            darkblue: '#002B49',
+                            lightblue: '#E6F2FF',
+                            gold: '#C59B27',
+                            goldlight: '#FFFDF0',
+                            silver: '#8A9EA7',
+                            paper: '#FAFAFA'
+                        }
+                    },
+                    fontFamily: {
+                        sans: ['Inter', 'system-ui', 'sans-serif'],
+                        handwriting: ['Georgia', 'serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <!-- FontAwesome icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <!-- MathJax for rendering LaTeX math notation -->
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&display=swap');
+
+        /* Lined paper pattern for physical handwriting when printed */
+        .lined-paper {
+            background-image: repeating-linear-gradient(transparent, transparent 27px, #CBD5E1 28px);
+            line-height: 28px !important;
+            background-attachment: local;
+        }
+
+        /* Printable stylesheet overrides */
+        @media print {
+            .no-print {
+                display: none !important;
+            }
+            body {
+                background: white !important;
+                color: black !important;
+                font-size: 10pt;
+            }
+            .tab-content {
+                display: block !important;
+                page-break-before: always;
+            }
+            .tab-content:first-of-type {
+                page-break-before: auto;
+            }
+            .page-break {
+                page-break-before: always;
+            }
+            .lined-area {
+                min-height: 160px;
+                border: 1px solid #64748B !important;
+                background-image: repeating-linear-gradient(transparent, transparent 25px, #94A3B8 26px) !important;
+                background-color: #FFFFFF !important;
+                border-radius: 6px !important;
+            }
+            textarea {
+                border: none !important;
+                background: transparent !important;
+                resize: none !important;
+            }
+            .shadow-lg, .shadow-md, .shadow-sm, .shadow-xl {
+                box-shadow: none !important;
+            }
+            .border {
+                border-color: #94A3B8 !important;
+            }
+            .print-page-header {
+                display: flex !important;
+                justify-content: space-between;
+                border-bottom: 2px solid #002B49;
+                padding-bottom: 6px;
+                margin-bottom: 15px;
+                font-size: 9pt;
+                font-weight: bold;
+                color: #002B49;
+            }
+        }
+
+        .print-page-header {
+            display: none;
+        }
+
+        .tab-btn.active {
+            border-bottom: 3px solid #00539B;
+            color: #00539B;
+            background-color: #E6F2FF;
+            font-weight: 800;
+        }
+    </style>
+</head>
+<body class="h-full font-sans text-slate-800 antialiased flex flex-col bg-slate-100">
+
+    <!-- Top Navigation & Action Bar -->
+    <header class="bg-btec-darkblue text-white shadow-lg sticky top-0 z-50 no-print">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-3 flex flex-wrap justify-between items-center gap-4">
+            <div class="flex items-center space-x-3">
+                <div class="bg-btec-gold text-btec-darkblue px-3 py-1.5 rounded-xl font-black text-xl tracking-wider shadow">
+                    BTEC
+                </div>
+                <div>
+                    <h1 class="text-lg font-extrabold tracking-tight">Unit 1: Anatomy & Physiology</h1>
+                    <p class="text-xs text-blue-200">Pearson BTEC Level 3 National Extended Diploma in Sport — Master Workbook</p>
+                </div>
+            </div>
+
+            <!-- Global Controls -->
+            <div class="flex items-center gap-2 sm:gap-3 flex-wrap">
+                <button onclick="toggleAllChaptersForPrint()" id="print-mode-btn" class="bg-amber-500 hover:bg-amber-600 text-btec-darkblue px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-sm">
+                    <i class="fas fa-eye"></i> <span id="print-mode-text">Show All Chapters for Print</span>
+                </button>
+                <button onclick="window.print()" class="bg-btec-blue hover:bg-blue-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-sm">
+                    <i class="fas fa-print"></i> Print (PDF)
+                </button>
+                <button onclick="exportAnswers()" class="bg-emerald-600 hover:bg-emerald-700 text-white px-3 py-1.5 rounded-lg text-xs font-bold flex items-center gap-1.5 transition shadow-sm">
+                    <i class="fas fa-file-export"></i> Backup Answers
+                </button>
+                <button onclick="clearWorkbook()" class="bg-red-700 hover:bg-red-800 text-white px-2.5 py-1.5 rounded-lg text-xs font-bold transition shadow-sm" title="Clear Workbook Data">
+                    <i class="fas fa-trash-alt"></i>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Learner Details Section -->
+    <section class="bg-white border-b border-slate-300 py-4 shadow-sm">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-4 gap-4 items-center">
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-btec-darkblue mb-1">Learner Name</label>
+                    <input type="text" id="student-name" placeholder="Enter student name..." oninput="saveStudentInfo()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-semibold text-slate-900 focus:bg-white focus:border-btec-blue focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-btec-darkblue mb-1">Tutor / Teacher</label>
+                    <input type="text" id="tutor-name" placeholder="Enter teacher name..." oninput="saveStudentInfo()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-semibold text-slate-900 focus:bg-white focus:border-btec-blue focus:outline-none">
+                </div>
+                <div>
+                    <label class="block text-xs font-bold uppercase tracking-wider text-btec-darkblue mb-1">Target Grade</label>
+                    <select id="target-grade" onchange="saveStudentInfo()" class="w-full bg-slate-50 border border-slate-300 rounded-lg px-3 py-1.5 text-sm font-bold text-slate-900 focus:bg-white focus:border-btec-blue focus:outline-none">
+                        <option value="">Select Target Grade</option>
+                        <option value="Pass (P)">Pass (P)</option>
+                        <option value="Merit (M)">Merit (M)</option>
+                        <option value="Distinction (D)">Distinction (D)</option>
+                        <option value="Distinction* (D*)">Distinction* (D*)</option>
+                    </select>
+                </div>
+                <div class="bg-btec-lightblue p-3 rounded-xl border border-blue-200 flex items-center justify-between">
+                    <div>
+                        <span class="block text-xs font-extrabold text-btec-darkblue uppercase">Current Target</span>
+                        <span id="grade-badge" class="text-sm font-black text-btec-blue">Target Not Set</span>
+                    </div>
+                    <i class="fas fa-graduation-cap text-2xl text-btec-blue"></i>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Navigation Tabs Bar -->
+    <nav class="bg-slate-200 border-b border-slate-300 no-print sticky top-[57px] z-40">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 overflow-x-auto">
+            <div class="flex space-x-1 py-2 min-w-max">
+                <button onclick="switchTab('overview')" id="tab-overview" class="tab-btn active px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold transition flex items-center gap-2">
+                    <i class="fas fa-clipboard-list"></i> Exam Guide
+                </button>
+                <button onclick="switchTab('ch1')" id="tab-ch1" class="tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-700 hover:text-btec-blue hover:bg-slate-300 transition flex items-center gap-2">
+                    <i class="fas fa-bone"></i> A. Skeletal
+                </button>
+                <button onclick="switchTab('ch2')" id="tab-ch2" class="tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-700 hover:text-btec-blue hover:bg-slate-300 transition flex items-center gap-2">
+                    <i class="fas fa-running"></i> B. Muscular
+                </button>
+                <button onclick="switchTab('ch3')" id="tab-ch3" class="tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-700 hover:text-btec-blue hover:bg-slate-300 transition flex items-center gap-2">
+                    <i class="fas fa-lungs"></i> C. Respiratory
+                </button>
+                <button onclick="switchTab('ch4')" id="tab-ch4" class="tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-700 hover:text-btec-blue hover:bg-slate-300 transition flex items-center gap-2">
+                    <i class="fas fa-heartbeat"></i> D. Cardiovascular
+                </button>
+                <button onclick="switchTab('ch5')" id="tab-ch5" class="tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold text-slate-700 hover:text-btec-blue hover:bg-slate-300 transition flex items-center gap-2">
+                    <i class="fas fa-bolt"></i> E. Energy Systems
+                </button>
+                <button onclick="switchTab('ch6')" id="tab-ch6" class="tab-btn px-3.5 py-2 rounded-lg text-xs sm:text-sm font-bold text-amber-900 bg-amber-100 hover:bg-amber-200 transition flex items-center gap-2 border border-amber-300">
+                    <i class="fas fa-star text-btec-gold"></i> AO5 Synoptic Masterclass
+                </button>
+            </div>
+        </div>
+    </nav>
+
+    <main class="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 py-8 space-y-12">
+
+        <!-- ========================================================================= -->
+        <!-- OVERVIEW TAB: SPECIFICATION, ASSESSMENT OUTCOMES & COMMAND WORDS -->
+        <!-- ========================================================================= -->
+        <div id="content-overview" class="tab-content space-y-8">
+            <div class="print-page-header">
+                <span>Unit 1: Anatomy & Physiology — Master Learner Workbook</span>
+                <span>Unit Overview & Assessment Guide</span>
+            </div>
+
+            <!-- Banner -->
+            <div class="bg-gradient-to-r from-btec-darkblue to-btec-blue text-white p-6 rounded-2xl shadow-md flex justify-between items-center">
+                <div class="flex items-center gap-4">
+                    <span class="bg-white/10 p-3.5 rounded-xl"><i class="fas fa-book-open text-3xl text-btec-gold"></i></span>
+                    <div>
+                        <h2 class="text-2xl font-black">Unit 1: Anatomy and Physiology Overview</h2>
+                        <p class="text-blue-100 text-xs sm:text-sm">Pearson External Examination Structure & Command Words Guide</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-btec-gold text-btec-darkblue font-black px-3 py-1.5 rounded-lg uppercase">Mandatory Unit</span>
+            </div>
+
+            <!-- Getting Started Task -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-4">
+                <div class="border-b border-slate-200 pb-3 flex justify-between items-center">
+                    <h3 class="text-base font-bold text-btec-darkblue flex items-center gap-2">
+                        <i class="fas fa-rocket text-btec-gold"></i> Getting Started Activity
+                    </h3>
+                    <span class="text-xs font-semibold text-slate-500">Diagnostic Task</span>
+                </div>
+                <p class="text-xs sm:text-sm text-slate-700 leading-relaxed">
+                    Anatomy and physiology are essential ingredients in all sport and exercise performance. List the immediate physiological changes your body experiences when you begin exercising (e.g. running or playing a match) and match each change to its corresponding body system.
+                </p>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                        <thead>
+                            <tr class="bg-btec-darkblue text-white">
+                                <th class="p-2 border">Physiological Response Experienced</th>
+                                <th class="p-2 border">Body System Affected</th>
+                                <th class="p-2 border">Immediate Sporting Advantage</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-300 bg-white">
+                            <tr>
+                                <td class="p-2 border"><input id="gs-resp-1" oninput="saveAnswer('gs-resp-1')" type="text" class="w-full p-1 border-b" placeholder="e.g. Heart rate increases"></td>
+                                <td class="p-2 border"><input id="gs-sys-1" oninput="saveAnswer('gs-sys-1')" type="text" class="w-full p-1 border-b" placeholder="Cardiovascular System"></td>
+                                <td class="p-2 border"><input id="gs-adv-1" oninput="saveAnswer('gs-adv-1')" type="text" class="w-full p-1 border-b" placeholder="Delivers O2 to working muscles faster"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border"><input id="gs-resp-2" oninput="saveAnswer('gs-resp-2')" type="text" class="w-full p-1 border-b" placeholder="e.g. Breathing rate & tidal volume increase"></td>
+                                <td class="p-2 border"><input id="gs-sys-2" oninput="saveAnswer('gs-sys-2')" type="text" class="w-full p-1 border-b" placeholder="Respiratory System"></td>
+                                <td class="p-2 border"><input id="gs-adv-2" oninput="saveAnswer('gs-adv-2')" type="text" class="w-full p-1 border-b" placeholder="Increases O2 intake and CO2 removal"></td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 border"><input id="gs-resp-3" oninput="saveAnswer('gs-resp-3')" type="text" class="w-full p-1 border-b" placeholder="e.g. Increased synovial fluid production"></td>
+                                <td class="p-2 border"><input id="gs-sys-3" oninput="saveAnswer('gs-sys-3')" type="text" class="w-full p-1 border-b" placeholder="Skeletal System"></td>
+                                <td class="p-2 border"><input id="gs-adv-3" oninput="saveAnswer('gs-adv-3')" type="text" class="w-full p-1 border-b" placeholder="Lubricates joints & reduces friction"></td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- Assessment Outcomes Breakdown -->
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-6">
+                <!-- AO Summary Table -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-4">
+                    <h3 class="text-base font-bold text-btec-darkblue border-b border-slate-200 pb-2">
+                        <i class="fas fa-bullseye text-btec-blue"></i> Assessment Outcomes (AO1 – AO5)
+                    </h3>
+                    <div class="space-y-3 text-xs">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-extrabold text-btec-blue block">AO1: Knowledge (1 – 5 marks)</span>
+                            Demonstrate knowledge of body systems, structures, functions, characteristics, and definitions.
+                            <div class="mt-1 text-slate-500 font-semibold">Command Words: Identify, Describe, Give, State, Name</div>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-extrabold text-btec-blue block">AO2: Understanding (1 – 5 marks)</span>
+                            Demonstrate understanding of short- and long-term exercise effects on body systems in relation to sports performance.
+                            <div class="mt-1 text-slate-500 font-semibold">Command Words: Describe, Explain, Give, State, Name</div>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-extrabold text-btec-blue block">AO3: Analysis (6 marks)</span>
+                            Analyse exercise and sports movements, how the body responds to short- and long-term training.
+                            <div class="mt-1 text-slate-500 font-semibold">Command Words: Analyse, Assess</div>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-200">
+                            <span class="font-extrabold text-btec-blue block">AO4: Evaluation (6 marks)</span>
+                            Evaluate how body systems are used and how they interrelate during movement.
+                            <div class="mt-1 text-slate-500 font-semibold">Command Words: Evaluate, Assess</div>
+                        </div>
+
+                        <div class="p-3 bg-amber-50 rounded-xl border border-amber-300">
+                            <span class="font-extrabold text-amber-900 block"><i class="fas fa-star text-btec-gold"></i> AO5: Synoptic Interrelationships (8 marks)</span>
+                            Make connections between muscular and all other systems, cardiovascular and respiratory systems, and energy systems in response to exercise.
+                            <div class="mt-1 text-amber-800 font-semibold">Command Words: Analyse, Evaluate, Assess, Discuss, To what extent</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Command Words Matrix -->
+                <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-4">
+                    <h3 class="text-base font-bold text-btec-darkblue border-b border-slate-200 pb-2">
+                        <i class="fas fa-spell-check text-btec-gold"></i> Examiner Command Words Guide
+                    </h3>
+                    
+                    <div class="overflow-y-auto max-h-[380px] space-y-2 text-xs pr-1">
+                        <div class="p-2.5 bg-slate-50 rounded border border-slate-200">
+                            <strong class="text-btec-blue">Analyse:</strong> Identify relevant facts, demonstrate how they are linked, and explain the importance of each in relation to others.
+                        </div>
+                        <div class="p-2.5 bg-slate-50 rounded border border-slate-200">
+                            <strong class="text-btec-blue">Assess:</strong> Evaluate or estimate the nature, ability, or quality of something in context.
+                        </div>
+                        <div class="p-2.5 bg-slate-50 rounded border border-slate-200">
+                            <strong class="text-btec-blue">Describe:</strong> Give a full account of all information including relevant details of features.
+                        </div>
+                        <div class="p-2.5 bg-slate-50 rounded border border-slate-200">
+                            <strong class="text-btec-blue">Discuss:</strong> Write about the topic in detail, taking into account different perspectives and factors.
+                        </div>
+                        <div class="p-2.5 bg-slate-50 rounded border border-slate-200">
+                            <strong class="text-btec-blue">Evaluate:</strong> Bring all relevant information together to make a supported judgement/conclusion.
+                        </div>
+                        <div class="p-2.5 bg-slate-50 rounded border border-slate-200">
+                            <strong class="text-btec-blue">Explain:</strong> Make an idea clear by describing it in detail with supporting facts and physiological mechanisms.
+                        </div>
+                        <div class="p-2.5 bg-slate-50 rounded border border-slate-200">
+                            <strong class="text-btec-blue">To what extent:</strong> Review information and form a balanced judgement after considering opposing viewpoints.
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- CHAPTER 1: SKELETAL SYSTEM (A1 - A6) -->
+        <!-- ========================================================================= -->
+        <div id="content-ch1" class="tab-content hidden space-y-8">
+            <div class="print-page-header">
+                <span>Unit 1: Anatomy & Physiology — Master Learner Workbook</span>
+                <span>Learning Aim A: The Skeletal System</span>
+            </div>
+
+            <div class="bg-gradient-to-r from-btec-darkblue to-btec-blue text-white p-6 rounded-2xl shadow-md flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <span class="bg-white/10 p-3 rounded-xl"><i class="fas fa-bone text-3xl text-btec-gold"></i></span>
+                    <div>
+                        <h2 class="text-2xl font-black">Learning Aim A: The Skeletal System</h2>
+                        <p class="text-blue-100 text-xs sm:text-sm">Specification Coverage: A1, A2, A3, A4, A5, A6</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full font-bold">A1–A6</span>
+            </div>
+
+            <!-- EXAMINER GLOSSARY & KEY TERMS CHUNK 1 -->
+            <div class="bg-amber-50 border-2 border-btec-gold p-5 rounded-2xl shadow-sm space-y-3">
+                <div class="flex items-center gap-2 border-b border-amber-200 pb-2">
+                    <i class="fas fa-key text-btec-gold text-xl"></i>
+                    <h3 class="font-extrabold text-btec-darkblue text-base">Key Technical Terms & Examiner Vocabulary</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Anatomy & Physiology</span>
+                        Anatomy is the study of structure; Physiology is the study of bodily function and response to exercise.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Axial Skeleton (80 Bones)</span>
+                        Maintains central axis: Cranium, Vertebral Column, Ribs, Sternum.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Appendicular Skeleton (126)</span>
+                        Facilitates movement: Shoulder girdle, Pelvic girdle, Upper & Lower limbs.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Osteoblasts & Osteoclasts</span>
+                        Osteoblasts build bone matrix using calcium; Osteoclasts reabsorb/break down old bone.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Epiphyseal Plate</span>
+                        Growth plate near bone epiphysis where cartilage ossifies into hard compact bone.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Articulation</span>
+                        A junction where two or more bones meet to form a joint.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Synovial Fluid</span>
+                        Viscous liquid secreted by synovial membrane to lubricate joints and reduce friction.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Bone Mineral Density (BMD)</span>
+                        Amount of mineral matter per $\text{cm}^2$ of bone tissue; elevated via weight-bearing activity.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ANATOMICAL POSITIONS & BONE CLASSIFICATION (A1) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">A1 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Anatomical Positions & Bone Classification</h3>
+                </div>
+
+                <!-- Anatomical Position Terms Table -->
+                <div class="space-y-3">
+                    <h4 class="font-bold text-xs text-btec-darkblue uppercase">1. Anatomical Terminology Reference Table</h4>
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                            <thead>
+                                <tr class="bg-btec-darkblue text-white">
+                                    <th class="p-2 border">Term</th>
+                                    <th class="p-2 border">Meaning / Position relative to body</th>
+                                    <th class="p-2 border">Sporting Example</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-300 bg-white">
+                                <tr>
+                                    <td class="p-2 font-bold border">Anterior</td>
+                                    <td class="p-2 border">To the front or in front of the body</td>
+                                    <td class="p-2 border">Quadriceps are on the anterior thigh</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Posterior</td>
+                                    <td class="p-2 border">To the rear or behind the body</td>
+                                    <td class="p-2 border">Hamstrings are on the posterior thigh</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Medial</td>
+                                    <td class="p-2 border">Towards the midline or central axis</td>
+                                    <td class="p-2 border">Tibia is medial relative to the fibula</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Lateral</td>
+                                    <td class="p-2 border">Away from the midline or central axis</td>
+                                    <td class="p-2 border">Fibula is lateral relative to the tibia</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Proximal</td>
+                                    <td class="p-2 border">Nearer to the root/origin of the limb attachment</td>
+                                    <td class="p-2 border">Proximal end of humerus forms shoulder joint</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Distal</td>
+                                    <td class="p-2 border">Further away from the root/origin of limb attachment</td>
+                                    <td class="p-2 border">Distal end of radius articulates with carpals</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Superior / Inferior</td>
+                                    <td class="p-2 border">Superior = Above / Inferior = Below</td>
+                                    <td class="p-2 border">Cranium is superior to the sternum</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+
+                <!-- 5 Bone Types Matrix -->
+                <div class="space-y-3">
+                    <h4 class="font-bold text-xs text-btec-darkblue uppercase">2. Five Types of Bone Classification Matrix</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-5 gap-3 text-xs">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                            <span class="font-bold text-btec-blue block mb-1">Long Bones</span>
+                            Diaphysis (shaft) & Epiphysis ends. Acts as levers.
+                            <div class="mt-2 font-semibold text-slate-700">Femur, Humerus, Tibia, Radius</div>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                            <span class="font-bold text-btec-blue block mb-1">Short Bones</span>
+                            Cube-shaped cancellous bone. Provide stability & shock absorption.
+                            <div class="mt-2 font-semibold text-slate-700">Carpals, Tarsals</div>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                            <span class="font-bold text-btec-blue block mb-1">Flat Bones</span>
+                            Thin, curved, large surface area. Protection & muscle attachment.
+                            <div class="mt-2 font-semibold text-slate-700">Cranium, Sternum, Scapula, Ribs</div>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                            <span class="font-bold text-btec-blue block mb-1">Irregular Bones</span>
+                            Complex non-standard shape. Specialized protection & movement.
+                            <div class="mt-2 font-semibold text-slate-700">Vertebrae, Pelvis (Innominate)</div>
+                        </div>
+
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                            <span class="font-bold text-btec-blue block mb-1">Sesamoid Bones</span>
+                            Embedded within tendons. Reduce friction & enhance lever angle.
+                            <div class="mt-2 font-semibold text-slate-700">Patella, Pisiform</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- VERTEBRAL COLUMN & POSTURAL DEVIATIONS (A1, A3) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">A1 & A3 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Vertebral Column Regions & Postural Deviations</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Vertebral Regions Table -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-xs text-btec-darkblue uppercase">33 Vertebrae Across 5 Spine Regions:</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                                <thead>
+                                    <tr class="bg-btec-darkblue text-white">
+                                        <th class="p-2 border">Region</th>
+                                        <th class="p-2 border">Number</th>
+                                        <th class="p-2 border">Anatomical Role & Features</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-300 bg-white">
+                                    <tr>
+                                        <td class="p-2 font-bold border">Cervical</td>
+                                        <td class="p-2 border">7 (C1–C7)</td>
+                                        <td class="p-2 border">Neck region; C1 Atlas & C2 Axis form pivot joint for head rotation.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border">Thoracic</td>
+                                        <td class="p-2 border">12 (T1–T12)</td>
+                                        <td class="p-2 border">Mid-back; articulate with 12 pairs of ribs to form protective chest cage.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border">Lumbar</td>
+                                        <td class="p-2 border">5 (L1–L5)</td>
+                                        <td class="p-2 border">Lower back; largest bodies for heavy weight-bearing during movement.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border">Sacral</td>
+                                        <td class="p-2 border">5 (Fused)</td>
+                                        <td class="p-2 border">Forms triangular sacrum back wall of pelvic girdle.</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border">Coccygeal</td>
+                                        <td class="p-2 border">4 (Fused)</td>
+                                        <td class="p-2 border">Forms tailbone providing muscle attachment base.</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+
+                    <!-- Postural Deviations Explanation -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300 space-y-3 text-xs">
+                        <h4 class="font-bold text-btec-darkblue uppercase">Postural Deviations & Neutral Spine:</h4>
+                        <div class="p-3 bg-white rounded-lg border border-slate-200">
+                            <strong class="text-btec-blue block mb-1">Neutral Spine:</strong>
+                            Proper alignment with normal natural cervical (concave), thoracic (convex), and lumbar (concave) curves providing optimal shock absorption.
+                        </div>
+                        <div class="p-3 bg-white rounded-lg border border-slate-200">
+                            <strong class="text-btec-blue block mb-1">Kyphosis:</strong>
+                            Excessive outward curve of thoracic spine ("hunchback"). Caused by weak upper back muscles, poor posture, or spinal growth deformities.
+                        </div>
+                        <div class="p-3 bg-white rounded-lg border border-slate-200">
+                            <strong class="text-btec-blue block mb-1">Scoliosis:</strong>
+                            Abnormal sideways (lateral "S" or "C") curvature of the spine, usually thoracic. Often congenital or hereditary during childhood growth spurts.
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Process of Bone Growth Textarea -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1">Explain Ossification, Epiphyseal Growth Plates, and Osteoblast vs Osteoclast activity during remodelling (A1):</label>
+                    <div class="lined-area p-3 rounded-lg border border-slate-300 bg-slate-50">
+                        <textarea id="ch1-ossification" oninput="saveAnswer('ch1-ossification')" rows="5" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Ossification is the process of bone formation... Osteoblasts deposit calcium to build new bone matrix... Osteoclasts reabsorb bone tissue... Epiphyseal plates at diaphysis/epiphysis junction allow length expansion..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FUNCTIONS OF SKELETON & JOINTS (A2, A3) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">A2 & A3 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Functions of the Skeleton & Synovial Joint Classification</h3>
+                </div>
+
+                <!-- 8 Skeletal Functions List -->
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200"><strong>1. Support:</strong> Framework supporting soft tissues & muscles.</div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200"><strong>2. Protection:</strong> Encloses cranium/brain, ribs/heart & lungs.</div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200"><strong>3. Movement/Leverage:</strong> Muscle tendons pull bones across joints.</div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200"><strong>4. Mineral Storage:</strong> Reservoir for calcium and phosphorus.</div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200"><strong>5. Blood Cell Production:</strong> Red/white cells produced in bone marrow.</div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200"><strong>6. Weight Bearing:</strong> Structural strength to absorb impact.</div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200"><strong>7. Muscle Attachment:</strong> Origin/insertion points for skeletal muscle.</div>
+                    <div class="p-3 bg-slate-50 rounded-lg border border-slate-200"><strong>8. Friction Reduction:</strong> Synovial joints fluid prevents wearing.</div>
+                </div>
+
+                <!-- Synovial Joint Structure Analysis -->
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 items-start">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300 space-y-2 text-xs">
+                        <h4 class="font-bold text-btec-darkblue uppercase mb-2">Synovial Joint Structural Features:</h4>
+                        <p><strong>Articular Cartilage:</strong> Smooth hyaline cartilage covering bone ends to stop friction and wear.</p>
+                        <p><strong>Joint Capsule:</strong> Tough fibrous sleeve securing bones in position.</p>
+                        <p><strong>Synovial Membrane:</strong> Internal lining secreting lubricating synovial fluid.</p>
+                        <p><strong>Synovial Fluid:</strong> Viscous fluid lubricating joint, absorbing shock, supplying cartilage nutrients.</p>
+                        <p><strong>Bursa:</strong> Fluid-filled sac preventing friction between tendons and bone surfaces.</p>
+                        <p><strong>Ligaments:</strong> Fibrous connective bands binding bone-to-bone for stability.</p>
+                    </div>
+
+                    <!-- 6 Types of Synovial Joints Table -->
+                    <div class="overflow-x-auto">
+                        <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                            <thead>
+                                <tr class="bg-btec-darkblue text-white">
+                                    <th class="p-2 border">Joint Type</th>
+                                    <th class="p-2 border">Anatomical Location</th>
+                                    <th class="p-2 border">Permitted Movements</th>
+                                </tr>
+                            </thead>
+                            <tbody class="divide-y divide-slate-300 bg-white">
+                                <tr>
+                                    <td class="p-2 font-bold border">Hinge</td>
+                                    <td class="p-2 border">Elbow, Knee, Ankle</td>
+                                    <td class="p-2 border">Flexion, Extension</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Ball & Socket</td>
+                                    <td class="p-2 border">Shoulder, Hip</td>
+                                    <td class="p-2 border">Flexion, Extension, Abduction, Adduction, Rotation, Circumduction</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Pivot</td>
+                                    <td class="p-2 border">Atlas/Axis (Neck), Radioulnar</td>
+                                    <td class="p-2 border">Rotation</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Condyloid</td>
+                                    <td class="p-2 border">Wrist (Metacarpophalangeal)</td>
+                                    <td class="p-2 border">Flexion, Extension, Abduction, Adduction</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Gliding</td>
+                                    <td class="p-2 border">Carpals, Tarsals</td>
+                                    <td class="p-2 border">Gliding over flat surfaces</td>
+                                </tr>
+                                <tr>
+                                    <td class="p-2 font-bold border">Saddle</td>
+                                    <td class="p-2 border">Base of Thumb</td>
+                                    <td class="p-2 border">Flexion, Extension, Abduction, Adduction, Circumduction</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+
+            <!-- EXERCISE RESPONSES, ADAPTATIONS & ADDITIONAL FACTORS (A4, A5, A6) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">A4, A5 & A6 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Acute Responses, Chronic Adaptations & Health Conditions</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Acute Responses (Short-Term)</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li>Increased synovial fluid production in joint cavity.</li>
+                            <li>Synovial fluid becomes less viscous (thinner), increasing movement fluidity.</li>
+                            <li>Increased nutrient delivery to articular cartilage.</li>
+                            <li>Increased uptake of minerals (calcium) into bone matrix under mechanical loading.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Chronic Adaptations (Long-Term)</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li>Increased Bone Mineral Density (BMD) making bones stronger and thicker.</li>
+                            <li>Hypertrophy and increased tensile strength of ligaments.</li>
+                            <li>Increased ligament pliability leading to enhanced joint flexibility.</li>
+                            <li>Thickening of articular cartilage layers.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Additional Factors & Health</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li><strong>Osteoarthritis:</strong> Degeneration of articular cartilage causing bone-on-bone friction. Controlled by low-impact exercise.</li>
+                            <li><strong>Osteoporosis:</strong> Loss of bone density causing brittle bones. High-impact / resistance weight-bearing exercise stimulates osteoblasts to elevate BMD.</li>
+                            <li><strong>Ageing:</strong> Reduced bone density and elastic fibres in ligaments; managed through regular exercise.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Distinction Exam Practice Question -->
+                <div class="bg-btec-goldlight border-2 border-btec-gold p-5 rounded-2xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-extrabold text-slate-900 text-sm">
+                            <i class="fas fa-pen-nib text-btec-gold mr-1"></i> Exam Practice (AO3 / AO4 Distinction Question - 6 Marks)
+                        </h4>
+                        <span class="bg-btec-gold text-btec-darkblue text-xs font-black px-2 py-0.5 rounded uppercase">6 Marks</span>
+                    </div>
+                    <p class="text-xs text-slate-800 leading-relaxed">
+                        <strong>Question:</strong> <em>Analyse how a 6-month resistance training programme impacts Bone Mineral Density (BMD) and ligament strength in a basketball player. Evaluate how these physiological adaptations contribute to performance enhancement and injury reduction during high-impact landings.</em>
+                    </p>
+                    <div class="lined-area p-3 rounded-xl border border-amber-300 bg-white">
+                        <textarea id="ch1-exam-ans" oninput="saveAnswer('ch1-exam-ans')" rows="7" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Structure answer: 1. Mechanism of osteoblast activation & calcium absorption under weight load... 2. Ligament collagen alignment and tensile strength gains... 3. Direct application to jumping/landing mechanics in basketball..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- CHAPTER 2: MUSCULAR SYSTEM (B1 - B8) -->
+        <!-- ========================================================================= -->
+        <div id="content-ch2" class="tab-content hidden space-y-8">
+            <div class="print-page-header">
+                <span>Unit 1: Anatomy & Physiology — Master Learner Workbook</span>
+                <span>Learning Aim B: The Muscular System</span>
+            </div>
+
+            <div class="bg-gradient-to-r from-btec-darkblue to-btec-blue text-white p-6 rounded-2xl shadow-md flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <span class="bg-white/10 p-3 rounded-xl"><i class="fas fa-running text-3xl text-btec-gold"></i></span>
+                    <div>
+                        <h2 class="text-2xl font-black">Learning Aim B: The Muscular System</h2>
+                        <p class="text-blue-100 text-xs sm:text-sm">Specification Coverage: B1, B2, B3, B4, B5, B6, B7, B8</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full font-bold">B1–B8</span>
+            </div>
+
+            <!-- EXAMINER GLOSSARY & KEY TERMS CHUNK 2 -->
+            <div class="bg-amber-50 border-2 border-btec-gold p-5 rounded-2xl shadow-sm space-y-3">
+                <div class="flex items-center gap-2 border-b border-amber-200 pb-2">
+                    <i class="fas fa-key text-btec-gold text-xl"></i>
+                    <h3 class="font-extrabold text-btec-darkblue text-base">Key Technical Terms & Examiner Vocabulary</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Agonist (Prime Mover)</span>
+                        Muscle primarily contracting concentrically to produce targeted joint movement.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Antagonist</span>
+                        Muscle relaxing and lengthening eccentrically to control speed and movement smoothly.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Synergist & Fixator</span>
+                        Synergist assists agonist; Fixator stabilizes origin bone (e.g. Trapezius in bicep curls).
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Type I (Slow Oxidative)</span>
+                        High capillary density, myoglobin/mitochondria rich; fatigue resistant for endurance.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Type IIa (FOG)</span>
+                        Fast Oxidative Glycolytic; moderate force & resistance to fatigue.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Type IIx (Fast Glycolytic)</span>
+                        Rapid contraction speed, high PC stores; fatigues rapidly during explosive power actions.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">All-or-None Law</span>
+                        Motor unit muscle fibers contract maximally or not at all once threshold stimulus voltage is hit.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Hypertrophy vs Sarcopenia</span>
+                        Hypertrophy is muscle size increase from resistance training; Sarcopenia is muscle mass loss with age.
+                    </div>
+                </div>
+            </div>
+
+            <!-- MAJOR MUSCLES & CONTRACTION TYPES (B1, B2, B3) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">B1, B2 & B3 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Muscle Tissue Types & Contraction Mechanics</h3>
+                </div>
+
+                <!-- 3 Muscle Tissues -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                        <strong class="text-btec-blue block mb-1">Skeletal Muscle</strong>
+                        Voluntary control, striated under microscope. Attached to bones via tendons to produce movement.
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                        <strong class="text-btec-blue block mb-1">Smooth Muscle</strong>
+                        Involuntary control, non-striated. Located in blood vessel walls (vasoconstriction) and digestive tract.
+                    </div>
+                    <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                        <strong class="text-btec-blue block mb-1">Cardiac Muscle</strong>
+                        Involuntary control, striated with intercalated discs. Located exclusively in heart wall (myocardium).
+                    </div>
+                </div>
+
+                <!-- Contraction Types Matrix -->
+                <div class="space-y-3">
+                    <h4 class="font-bold text-xs text-btec-darkblue uppercase">Types of Muscle Contraction:</h4>
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                            <span class="font-bold text-btec-blue block mb-1">Isotonic Concentric</span>
+                            Muscle shortens under tension.
+                            <div class="mt-2 text-slate-700"><strong>Example:</strong> Upward phase of bicep curl (Biceps shortening).</div>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                            <span class="font-bold text-btec-blue block mb-1">Isotonic Eccentric</span>
+                            Muscle lengthens under tension with control.
+                            <div class="mt-2 text-slate-700"><strong>Example:</strong> Downward lowering phase of squat (Quadriceps lengthening).</div>
+                        </div>
+                        <div class="p-3 bg-slate-50 rounded-xl border border-slate-300">
+                            <span class="font-bold text-btec-blue block mb-1">Isometric</span>
+                            Muscle length remains constant under force; no movement.
+                            <div class="mt-2 text-slate-700"><strong>Example:</strong> Holding a plank position or rugby scrum engagement.</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Antagonistic Analysis Task -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1">Analyse Antagonistic Roles (Agonist, Antagonist, Fixator) during a Football Penalty Kick (Preparation Phase vs Striking Phase) (B4):</label>
+                    <div class="lined-area p-3 rounded-lg border border-slate-300 bg-slate-50">
+                        <textarea id="ch2-antagonistic" oninput="saveAnswer('ch2-antagonistic')" rows="6" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Preparation Phase (Knee Flexion): Agonist = Hamstrings (concentric), Antagonist = Quadriceps (lengthening)...&#10;Striking Phase (Knee Extension): Agonist = Quadriceps (concentric), Antagonist = Hamstrings (eccentric control), Fixator = Gluteals/Core stabilizing pelvis..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- FIBRE TYPES & MOTOR UNITS (B5) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">B5 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Muscle Fibre Type Comparison Table</h3>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                        <thead>
+                            <tr class="bg-btec-darkblue text-white">
+                                <th class="p-2 border">Feature</th>
+                                <th class="p-2 border">Type I (Slow Oxidative)</th>
+                                <th class="p-2 border">Type IIa (Fast Oxidative Glycolytic)</th>
+                                <th class="p-2 border">Type IIx (Fast Glycolytic)</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-300 bg-white">
+                            <tr>
+                                <td class="p-2 font-bold border">Contraction Speed & Force</td>
+                                <td class="p-2 border">Slow speed / Low force</td>
+                                <td class="p-2 border">Fast speed / Moderate force</td>
+                                <td class="p-2 border">Very rapid / High explosive force</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold border">Fatigue Resistance</td>
+                                <td class="p-2 border">High fatigue resistance</td>
+                                <td class="p-2 border">Moderate fatigue resistance</td>
+                                <td class="p-2 border">Low / Fatigues very rapidly</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold border">Capillary & Myoglobin Content</td>
+                                <td class="p-2 border">High (Red appearance)</td>
+                                <td class="p-2 border">Medium (Pink appearance)</td>
+                                <td class="p-2 border">Low (White appearance)</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold border">Mitochondrial Density</td>
+                                <td class="p-2 border">High density</td>
+                                <td class="p-2 border">Medium density</td>
+                                <td class="p-2 border">Low density</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold border">Primary Fuel Source</td>
+                                <td class="p-2 border">Triglycerides / Aerobic Glycogen</td>
+                                <td class="p-2 border">Glycogen (Aerobic & Anaerobic)</td>
+                                <td class="p-2 border">Phosphocreatine (PC) & Glycogen</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold border">Sporting Example</td>
+                                <td class="p-2 border">Marathon runner, 1500m swimmer</td>
+                                <td class="p-2 border">800m runner, invasion game midfielder</td>
+                                <td class="p-2 border">100m sprinter, shot putter, weightlifter</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <!-- RESPONSES, ADAPTATIONS & ADDITIONAL FACTORS (B6, B7, B8) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">B6, B7 & B8 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Exercise Responses, Chronic Hypertrophy & Additional Factors</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Acute Responses (Short-Term)</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li>Increased blood supply & vasodilation to working muscles.</li>
+                            <li>Increased muscle temperature elevating enzyme activity.</li>
+                            <li>Increased muscle pliability reducing strain risk.</li>
+                            <li>Microscopic tears in muscle fibers during intense eccentric contractions.</li>
+                            <li>Lactate / $H^+$ accumulation during anaerobic effort.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Chronic Adaptations (Long-Term)</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li>Hypertrophy: Increase in muscle fiber cross-sectional size.</li>
+                            <li>Increased actin & myosin myofibrils.</li>
+                            <li>Increased glycogen & phosphocreatine (PC) storage.</li>
+                            <li>Increased myoglobin content & mitochondrial density (aerobic).</li>
+                            <li>Increased tendon strength.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Additional Factors</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li><strong>Cramps:</strong> Involuntary painful muscle contraction caused by dehydration and electrolyte loss ($\text{Na}^+, \text{K}^+$).</li>
+                            <li><strong>DOMS:</strong> Delayed Onset Muscle Soreness (24–48 hours post exercise) caused by micro-tears during eccentric load.</li>
+                            <li><strong>Sarcopenia:</strong> Age-related loss of skeletal muscle mass and strength.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Distinction Exam Question -->
+                <div class="bg-btec-goldlight border-2 border-btec-gold p-5 rounded-2xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-extrabold text-slate-900 text-sm">
+                            <i class="fas fa-pen-nib text-btec-gold mr-1"></i> Exam Practice (AO3 Distinction Question - 6 Marks)
+                        </h4>
+                        <span class="bg-btec-gold text-btec-darkblue text-xs font-black px-2 py-0.5 rounded uppercase">6 Marks</span>
+                    </div>
+                    <p class="text-xs text-slate-800 leading-relaxed">
+                        <strong>Question:</strong> <em>Assess how the "All-or-None Law" governs motor unit recruitment when an 800m runner shifts pace into a 100m sprint finish. Detail the specific muscle fibre types recruited and energy substrate utilization changes.</em>
+                    </p>
+                    <div class="lined-area p-3 rounded-xl border border-amber-300 bg-white">
+                        <textarea id="ch2-exam-ans" oninput="saveAnswer('ch2-exam-ans')" rows="7" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Structure answer: 1. Explain All-or-None Law and motor neuron threshold potential... 2. Initial recruitment of Type I and Type IIa motor units during pace phase... 3. Spatial and wave summation recruiting Type IIx fast glycolytic units for sprint finish..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- CHAPTER 3: RESPIRATORY SYSTEM (C1 - C7) -->
+        <!-- ========================================================================= -->
+        <div id="content-ch3" class="tab-content hidden space-y-8">
+            <div class="print-page-header">
+                <span>Unit 1: Anatomy & Physiology — Master Learner Workbook</span>
+                <span>Learning Aim C: The Respiratory System</span>
+            </div>
+
+            <div class="bg-gradient-to-r from-btec-darkblue to-btec-blue text-white p-6 rounded-2xl shadow-md flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <span class="bg-white/10 p-3 rounded-xl"><i class="fas fa-lungs text-3xl text-btec-gold"></i></span>
+                    <div>
+                        <h2 class="text-2xl font-black">Learning Aim C: The Respiratory System</h2>
+                        <p class="text-blue-100 text-xs sm:text-sm">Specification Coverage: C1, C2, C3, C4, C5, C6, C7</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full font-bold">C1–C7</span>
+            </div>
+
+            <!-- EXAMINER GLOSSARY & KEY TERMS CHUNK 3 -->
+            <div class="bg-amber-50 border-2 border-btec-gold p-5 rounded-2xl shadow-sm space-y-3">
+                <div class="flex items-center gap-2 border-b border-amber-200 pb-2">
+                    <i class="fas fa-key text-btec-gold text-xl"></i>
+                    <h3 class="font-extrabold text-btec-darkblue text-base">Key Technical Terms & Examiner Vocabulary</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Tidal Volume (TV)</span>
+                        Volume of air inspired or expired per normal breath at rest (~500ml).
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Minute Ventilation ($V_e$)</span>
+                        Total air volume breathed per minute: $V_e = \text{Tidal Volume} \times \text{Breathing Rate}$.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Partial Pressure ($pO_2 / pCO_2$)</span>
+                        Pressure exerted by a single gas in a mixture; drives diffusion across membranes.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Gaseous Exchange</span>
+                        Diffusion of $O_2$ into capillaries and $CO_2$ into alveoli down pressure gradients.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Respiratory Control Centre (RCC)</span>
+                        Located in Medulla Oblongata; regulates breathing via Phrenic & Intercostal nerves.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Chemoreceptors</span>
+                        Sensory receptors in carotid bodies & aortic arch detecting blood $pH$ drops / $CO_2$ rises.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Residual Volume (RV)</span>
+                        Volume of air remaining in lungs following maximal forced expiration (~1200ml).
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Vital Capacity (VC)</span>
+                        Maximum air volume forcibly expired following maximal inspiration.
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESPIRATORY STRUCTURE & MECHANICS (C1, C2) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">C1 & C2 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Anatomical Conducting Zone & Mechanics of Breathing</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Airway Pathway -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300 space-y-2 text-xs">
+                        <h4 class="font-bold text-btec-darkblue uppercase mb-2">Conducting & Respiratory Zone Pathway:</h4>
+                        <div class="p-2 bg-white rounded border border-slate-200"><strong>1. Nasal Cavity:</strong> Warms, moistens, filters air via cilia.</div>
+                        <div class="p-2 bg-white rounded border border-slate-200"><strong>2. Pharynx & Larynx:</strong> Passageway & voice box protected by epiglottis.</div>
+                        <div class="p-2 bg-white rounded border border-slate-200"><strong>3. Trachea:</strong> Windpipe reinforced with C-shaped hyaline cartilage rings.</div>
+                        <div class="p-2 bg-white rounded border border-slate-200"><strong>4. Bronchi & Bronchioles:</strong> Left/right main branches splitting into smaller bronchioles.</div>
+                        <div class="p-2 bg-white rounded border border-slate-200"><strong>5. Alveoli:</strong> 300 million microscopic air sacs; primary site of gas exchange.</div>
+                    </div>
+
+                    <!-- Breathing Mechanics Table -->
+                    <div class="space-y-3">
+                        <h4 class="font-bold text-xs text-btec-darkblue uppercase">Mechanics of Inspiration vs Expiration:</h4>
+                        <div class="overflow-x-auto">
+                            <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                                <thead>
+                                    <tr class="bg-btec-darkblue text-white">
+                                        <th class="p-2 border">Action</th>
+                                        <th class="p-2 border">Inspiration (Inhalation)</th>
+                                        <th class="p-2 border">Expiration (Exhalation)</th>
+                                    </tr>
+                                </thead>
+                                <tbody class="divide-y divide-slate-300 bg-white">
+                                    <tr>
+                                        <td class="p-2 font-bold border">Diaphragm</td>
+                                        <td class="p-2 border">Contracts & flattens downwards</td>
+                                        <td class="p-2 border">Relapses into dome-shape upwards</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border">Intercostal Muscles</td>
+                                        <td class="p-2 border">External intercostals contract (ribs up/out)</td>
+                                        <td class="p-2 border">External relax; Internal contract during forced exhalation</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border">Thoracic Volume</td>
+                                        <td class="p-2 border">Increases chest cavity volume</td>
+                                        <td class="p-2 border">Decreases chest cavity volume</td>
+                                    </tr>
+                                    <tr>
+                                        <td class="p-2 font-bold border">Intra-pulmonary Pressure</td>
+                                        <td class="p-2 border">Drops below atmospheric pressure</td>
+                                        <td class="p-2 border">Rises above atmospheric pressure</td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- SPIROMETRY & GASEOUS EXCHANGE (C3, C4) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">C3 & C4 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Spirometry Lung Volumes & Gaseous Exchange Pathways</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Spirometry Equation & Definitions -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300 space-y-3 text-xs">
+                        <h4 class="font-bold text-btec-darkblue uppercase">Minute Ventilation Equation:</h4>
+                        <div class="p-3 bg-white rounded-lg border border-slate-300 text-center text-sm font-bold text-btec-blue">
+                            $$V_e = \text{Tidal Volume (TV)} \times \text{Breathing Rate (BR)}$$
+                        </div>
+                        <p><strong>Resting Example:</strong> $500\,\text{ml} \times 12\,\text{breaths/min} = 6,000\,\text{ml/min}\ (6\,\text{L/min})$</p>
+                        <p><strong>Maximal Exercise Example:</strong> $3,000\,\text{ml} \times 50\,\text{breaths/min} = 150,000\,\text{ml/min}\ (150\,\text{L/min})$</p>
+                    </div>
+
+                    <!-- Gaseous Exchange Diffusion Matrix -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300 space-y-3 text-xs">
+                        <h4 class="font-bold text-btec-darkblue uppercase">Partial Pressure Gradients ($pO_2$ / $pCO_2$):</h4>
+                        <p><strong>Alveolus vs Capillary ($O_2$):</strong> $pO_2$ in alveoli ($104\,\text{mmHg}$) is higher than deoxygenated capillary blood ($40\,\text{mmHg}$). $O_2$ diffuses rapidly into blood binding to hemoglobin.</p>
+                        <p><strong>Capillary vs Alveolus ($CO_2$):</strong> $pCO_2$ in deoxygenated blood ($45\,\text{mmHg}$) is higher than alveoli ($40\,\text{mmHg}$). $CO_2$ diffuses into alveoli for expiration.</p>
+                    </div>
+                </div>
+
+                <!-- Neural Control Textarea -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1">Explain the Neural & Chemical Control of Breathing during Exercise Onset (RCC, Chemoreceptors, Phrenic & Intercostal Nerves) (C5):</label>
+                    <div class="lined-area p-3 rounded-lg border border-slate-300 bg-slate-50">
+                        <textarea id="ch3-neural" oninput="saveAnswer('ch3-neural')" rows="6" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Respiratory Control Centre (RCC) in medulla oblongata receives signals from chemoreceptors (detecting blood pH drop/CO2 rise) and proprioceptors (detecting muscle movement)... RCC sends nerve impulses via Phrenic nerve to diaphragm and Intercostal nerves to intercostals to increase breathing rate and depth..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESPONSES, ADAPTATIONS & ADDITIONAL FACTORS (C5, C6, C7) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">C5, C6 & C7 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Exercise Responses, Chronic Adaptations & Environmental Factors</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Acute Responses (Short-Term)</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li>Increased breathing rate (RR) and Tidal Volume (TV).</li>
+                            <li>Massive rise in Minute Ventilation ($V_e$).</li>
+                            <li>Increased gaseous exchange diffusion rate across alveolar-capillary membrane.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Chronic Adaptations (Long-Term)</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li>Increased respiratory muscle strength (diaphragm & intercostals).</li>
+                            <li>Increased Vital Capacity (VC) and overall lung volumes.</li>
+                            <li>Increased alveolar surface area and capillarisation surrounding alveoli.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Additional Factors</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li><strong>Asthma:</strong> Constriction of smooth muscle in airways and mucosal swelling. Managed via bronchodilators.</li>
+                            <li><strong>Altitude:</strong> Low atmospheric pressure reduces $pO_2$, causing hypoxia; triggers EPO secretion for RBC production.</li>
+                            <li><strong>Smoking:</strong> Tar damages cilia, destroys alveolar walls (emphysema), carbon monoxide binds to hemoglobin.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Distinction Exam Question -->
+                <div class="bg-btec-goldlight border-2 border-btec-gold p-5 rounded-2xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-extrabold text-slate-900 text-sm">
+                            <i class="fas fa-pen-nib text-btec-gold mr-1"></i> Exam Practice (AO4 Distinction Question - 6 Marks)
+                        </h4>
+                        <span class="bg-btec-gold text-btec-darkblue text-xs font-black px-2 py-0.5 rounded uppercase">6 Marks</span>
+                    </div>
+                    <p class="text-xs text-slate-800 leading-relaxed">
+                        <strong>Question:</strong> <em>Evaluate how long-term altitude training ($\text{above } 2400\,\text{m}$) triggers physiological adaptations in the respiratory and cardiovascular systems to enhance aerobic endurance performance at sea level.</em>
+                    </p>
+                    <div class="lined-area p-3 rounded-xl border border-amber-300 bg-white">
+                        <textarea id="ch3-exam-ans" oninput="saveAnswer('ch3-exam-ans')" rows="7" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Structure answer: 1. Explain initial hypoxic environment & reduced partial pressure gradient... 2. Kidney secretion of Erythropoietin (EPO) stimulating red blood cell production... 3. Return to sea level impact on VO2 max, buffer capacity, and aerobic stamina..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- CHAPTER 4: CARDIOVASCULAR SYSTEM (D1 - D6) -->
+        <!-- ========================================================================= -->
+        <div id="content-ch4" class="tab-content hidden space-y-8">
+            <div class="print-page-header">
+                <span>Unit 1: Anatomy & Physiology — Master Learner Workbook</span>
+                <span>Learning Aim D: The Cardiovascular System</span>
+            </div>
+
+            <div class="bg-gradient-to-r from-btec-darkblue to-btec-blue text-white p-6 rounded-2xl shadow-md flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <span class="bg-white/10 p-3 rounded-xl"><i class="fas fa-heartbeat text-3xl text-btec-gold"></i></span>
+                    <div>
+                        <h2 class="text-2xl font-black">Learning Aim D: The Cardiovascular System</h2>
+                        <p class="text-blue-100 text-xs sm:text-sm">Specification Coverage: D1, D2, D3, D4, D5, D6</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full font-bold">D1–D6</span>
+            </div>
+
+            <!-- EXAMINER GLOSSARY & KEY TERMS CHUNK 4 -->
+            <div class="bg-amber-50 border-2 border-btec-gold p-5 rounded-2xl shadow-sm space-y-3">
+                <div class="flex items-center gap-2 border-b border-amber-200 pb-2">
+                    <i class="fas fa-key text-btec-gold text-xl"></i>
+                    <h3 class="font-extrabold text-btec-darkblue text-base">Key Technical Terms & Examiner Vocabulary</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Sinoatrial Node (SAN)</span>
+                        Heart's primary pacemaker in right atrium wall initiating electrical depolarisation.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Atrioventricular Node (AVN)</span>
+                        Delays electrical impulse (~0.1s) allowing atrial systole to fully top off ventricles.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Cardiac Output ($Q$)</span>
+                        Volume of blood pumped by heart per minute: $Q = \text{Stroke Volume (SV)} \times \text{Heart Rate (HR)}$.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Vascular Shunt Mechanism</span>
+                        Redistribution of blood flow during exercise via arteriole vasodilation/vasoconstriction.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Starling's Law of the Heart</span>
+                        Increased venous return stretches cardiac muscle walls, increasing stroke volume force.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Cardiovascular Drift</span>
+                        Progressive HR increase during steady-state exercise in heat due to reduced SV (sweat plasma loss).
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Bradycardia</span>
+                        Resting heart rate under $60\,\text{bpm}$ resulting from cardiac hypertrophy adaptation.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Pre-capillary Sphincters</span>
+                        Smooth muscle rings controlling capillary bed blood flow.
+                    </div>
+                </div>
+            </div>
+
+            <!-- CARDIAC ANATOMY & CONDUCTION SYSTEM (D1, D2) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">D1 & D2 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Cardiac Conduction Pathway & Cardiac Output Equations</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <!-- Conduction Step Box -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300 space-y-2 text-xs">
+                        <h4 class="font-bold text-btec-darkblue uppercase mb-2">Electrical Conduction Sequence:</h4>
+                        <div class="p-2 bg-white rounded border border-slate-200"><strong>1. SAN (Pacemaker):</strong> Spreads excitation wave across atrial walls causing atrial systole.</div>
+                        <div class="p-2 bg-white rounded border border-slate-200"><strong>2. AVN:</strong> Receives impulse and delays signal 0.1s to complete ventricular filling.</div>
+                        <div class="p-2 bg-white rounded border border-slate-200"><strong>3. Bundle of His:</strong> Conducts wave down septum towards heart apex.</div>
+                        <div class="p-2 bg-white rounded border border-slate-200"><strong>4. Purkinje Fibres:</strong> Spreads impulse upward through ventricular myocardium causing ventricular systole.</div>
+                    </div>
+
+                    <!-- Cardiac Output Math Box -->
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300 space-y-3 text-xs">
+                        <h4 class="font-bold text-btec-darkblue uppercase">Cardiac Output Formula:</h4>
+                        <div class="p-3 bg-white rounded-lg border border-slate-300 text-center text-sm font-bold text-btec-blue">
+                            $$Q = \text{Stroke Volume (SV)} \times \text{Heart Rate (HR)}$$
+                        </div>
+                        <p><strong>Resting Athlete:</strong> $Q = 70\,\text{ml} \times 70\,\text{bpm} = 4,900\,\text{ml/min}\ (\sim 5\,\text{L/min})$</p>
+                        <p><strong>Maximal Exercise (Trained):</strong> $Q = 160\,\text{ml} \times 190\,\text{bpm} = 30,400\,\text{ml/min}\ (\sim 30.4\,\text{L/min})$</p>
+                    </div>
+                </div>
+
+                <!-- Vascular Shunt Textarea -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1">Explain the Vascular Shunt Mechanism and Arteriole Vasodilation/Vasoconstriction during Exercise (D2):</label>
+                    <div class="lined-area p-3 rounded-lg border border-slate-300 bg-slate-50">
+                        <textarea id="ch4-vascular" oninput="saveAnswer('ch4-vascular')" rows="5" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Vasomotor control centre in medulla regulates blood flow... Arterioles supplying working muscles undergo vasodilation as smooth muscle relaxes and pre-capillary sphincters open (muscle flow increases from 20% to >80%)... Arterioles supplying non-essential organs (liver, kidneys, stomach) undergo vasoconstriction... Brain flow stays constant at ~15%..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESPONSES, ADAPTATIONS & ADDITIONAL FACTORS (D3, D4, D5, D6) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">D3, D4, D5 & D6 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Autonomic Control, Chronic Hypertrophy & Additional Factors</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4 text-xs">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Autonomic & Hormonal Control</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li><strong>CCC (Cardiac Control Centre):</strong> Medulla Oblongata.</li>
+                            <li><strong>Sympathetic Nervous System:</strong> Accelerator nerve releases Noradrenaline to SAN, increasing HR.</li>
+                            <li><strong>Parasympathetic System:</strong> Vagus nerve releases Acetylcholine to SAN, decreasing HR.</li>
+                            <li><strong>Adrenaline:</strong> Anticipatory rise before exercise.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Chronic Adaptations (Long-Term)</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li>Cardiac Hypertrophy (increase in left ventricle chamber size & muscular wall thickness).</li>
+                            <li>Increased resting & maximal Stroke Volume (SV).</li>
+                            <li>Bradycardia (resting HR $< 60\,\text{bpm}$).</li>
+                            <li>Capillarisation of skeletal muscle and myocardium.</li>
+                            <li>Increased blood plasma volume and red blood cell count.</li>
+                        </ul>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Additional Factors</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li><strong>Cardiovascular Drift:</strong> SV decreases due to sweat plasma loss in heat; HR drift upward maintains constant $Q$.</li>
+                            <li><strong>Hypertension:</strong> High blood pressure ($> 140/90\,\text{mmHg}$). Controlled through regular aerobic exercise.</li>
+                            <li><strong>SCD / SADS:</strong> Sudden Cardiac Death / Sudden Arrhythmic Death Syndrome in young athletes.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Distinction Exam Question -->
+                <div class="bg-btec-goldlight border-2 border-btec-gold p-5 rounded-2xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-extrabold text-slate-900 text-sm">
+                            <i class="fas fa-pen-nib text-btec-gold mr-1"></i> Exam Practice (AO3 Distinction Question - 6 Marks)
+                        </h4>
+                        <span class="bg-btec-gold text-btec-darkblue text-xs font-black px-2 py-0.5 rounded uppercase">6 Marks</span>
+                    </div>
+                    <p class="text-xs text-slate-800 leading-relaxed">
+                        <strong>Question:</strong> <em>Analyse how the Cardiac Control Centre (CCC) uses chemoreceptor, baroreceptor, and proprioceptor feedback to regulate heart rate via the autonomic nervous system during high-intensity interval training (HIIT).</em>
+                    </p>
+                    <div class="lined-area p-3 rounded-xl border border-amber-300 bg-white">
+                        <textarea id="ch4-exam-ans" oninput="saveAnswer('ch4-exam-ans')" rows="7" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Structure answer: 1. Chemoreceptors detect pH drop/CO2 rise; Proprioceptors detect joint action... 2. CCC stimulates Sympathetic nervous system via Accelerator nerve... 3. Recovery period activation of Parasympathetic vagus nerve releasing acetylcholine to SAN..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- CHAPTER 5: ENERGY SYSTEMS (E1 - E6) -->
+        <!-- ========================================================================= -->
+        <div id="content-ch5" class="tab-content hidden space-y-8">
+            <div class="print-page-header">
+                <span>Unit 1: Anatomy & Physiology — Master Learner Workbook</span>
+                <span>Learning Aim E: Energy Systems</span>
+            </div>
+
+            <div class="bg-gradient-to-r from-btec-darkblue to-btec-blue text-white p-6 rounded-2xl shadow-md flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <span class="bg-white/10 p-3 rounded-xl"><i class="fas fa-bolt text-3xl text-btec-gold"></i></span>
+                    <div>
+                        <h2 class="text-2xl font-black">Learning Aim E: Energy Systems</h2>
+                        <p class="text-blue-100 text-xs sm:text-sm">Specification Coverage: E1, E2, E3, E4, E5, E6</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-white/20 text-white px-3 py-1 rounded-full font-bold">E1–E6</span>
+            </div>
+
+            <!-- EXAMINER GLOSSARY & KEY TERMS CHUNK 5 -->
+            <div class="bg-amber-50 border-2 border-btec-gold p-5 rounded-2xl shadow-sm space-y-3">
+                <div class="flex items-center gap-2 border-b border-amber-200 pb-2">
+                    <i class="fas fa-key text-btec-gold text-xl"></i>
+                    <h3 class="font-extrabold text-btec-darkblue text-base">Key Technical Terms & Examiner Vocabulary</h3>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-3 text-xs">
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">ATP Breakdown</span>
+                        Exothermic reaction: $\text{ATP} \xrightarrow{\text{ATPase}} \text{ADP} + \text{P}_i + \text{Energy}\ (7.3\,\text{kcal})$.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Phosphocreatine (PC)</span>
+                        High-energy compound stored in sarcoplasm broken down by Creatine Kinase to re-synthesise ATP.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Anaerobic Glycolysis</span>
+                        Breakdown of glucose without $O_2$ by PFK producing 2 ATP and Pyruvic acid ($H^+$ ions).
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">OBLA</span>
+                        Onset of Blood Lactate Accumulation (point where blood lactate hits $4\,\text{mmol/L}$).
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Krebs Cycle</span>
+                        Occurs in mitochondrial matrix; Acetyl-CoA breaks down producing $CO_2$, 2 ATP, and $H^+$ ions.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Electron Transport Chain</span>
+                        Mitochondrial cristae; combines $H^+$ ions with $O_2$ producing $\text{H}_2\text{O}$ and 32–34 ATP.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">EPOC</span>
+                        Excess Post-exercise Oxygen Consumption (Fast Alactacid vs Slow Lactacid recovery phases).
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-200">
+                        <span class="font-bold text-btec-blue block">Beta-Oxidation</span>
+                        Process converting free fatty acids into Acetyl-CoA for Krebs cycle entry.
+                    </div>
+                </div>
+            </div>
+
+            <!-- ENERGY SYSTEMS COMPARISON MATRIX (E1, E2, E3, E4) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">E1 – E4 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Energy Systems Master Comparison Table</h3>
+                </div>
+
+                <div class="overflow-x-auto">
+                    <table class="w-full text-xs text-left border-collapse border border-slate-300">
+                        <thead>
+                            <tr class="bg-btec-darkblue text-white">
+                                <th class="p-2 border">System</th>
+                                <th class="p-2 border">Fuel Source & Controlling Enzymes</th>
+                                <th class="p-2 border">Duration & Yield</th>
+                                <th class="p-2 border">By-products</th>
+                                <th class="p-2 border">Sporting Example</th>
+                            </tr>
+                        </thead>
+                        <tbody class="divide-y divide-slate-300 bg-white">
+                            <tr>
+                                <td class="p-2 font-bold border text-btec-blue">ATP-PC (Alactic)</td>
+                                <td class="p-2 border">Phosphocreatine (PC) / Creatine Kinase</td>
+                                <td class="p-2 border">0 – 10 seconds | 1 ATP : 1 PC</td>
+                                <td class="p-2 border">None (Creatine + $\text{P}_i$)</td>
+                                <td class="p-2 border">100m sprint, shot put, weightlifting</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold border text-btec-blue">Lactate System (Anaerobic)</td>
+                                <td class="p-2 border">Glycogen / PFK, Glycogen Phosphorylase, LDH</td>
+                                <td class="p-2 border">10s – 2/3 mins | 2 ATP per Glucose</td>
+                                <td class="p-2 border">Lactic Acid ($H^+$ ions causing acidity)</td>
+                                <td class="p-2 border">400m sprint, 100m swim, gym set</td>
+                            </tr>
+                            <tr>
+                                <td class="p-2 font-bold border text-btec-blue">Aerobic System</td>
+                                <td class="p-2 border">Glycogen, Fats, Proteins / PFK, Lipase</td>
+                                <td class="p-2 border">3+ mins to hours | 36 – 38 ATP per Glucose</td>
+                                <td class="p-2 border">Carbon Dioxide ($\text{CO}_2$) & Water ($\text{H}_2\text{O}$)</td>
+                                <td class="p-2 border">Marathon, triathlon, road cycling</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+
+                <!-- EPOC Explanation Textarea -->
+                <div>
+                    <label class="block text-xs font-bold text-slate-800 mb-1">Explain EPOC (Excess Post-exercise Oxygen Consumption) — Fast Alactacid Phase vs Slow Lactacid Phase (E5, E6):</label>
+                    <div class="lined-area p-3 rounded-lg border border-slate-300 bg-slate-50">
+                        <textarea id="ch5-epoc" oninput="saveAnswer('ch5-epoc')" rows="6" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Fast Alactacid Component (2-3 mins, 2-3L O2): Replenishes ATP and Phosphocreatine stores, re-saturates myoglobin with oxygen...&#10;Slow Lactacid Component (hours): Removes lactic acid (converting back to pyruvate/glycogen via Cori cycle), pays for elevated body temperature, cardiac output, and breathing rate..."></textarea>
+                    </div>
+                </div>
+            </div>
+
+            <!-- RESPONSES & ADAPTATIONS (E5, E6) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-6">
+                <div class="border-b border-slate-200 pb-3">
+                    <span class="bg-btec-blue text-white text-xs font-bold px-2.5 py-1 rounded-full uppercase">E5 & E6 Content</span>
+                    <h3 class="text-lg font-bold text-slate-900 mt-1">Energy System Adaptations & Energy Continuum</h3>
+                </div>
+
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6 text-xs">
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Energy Continuum Interplay</span>
+                        <p>No energy system works in total isolation. The energy continuum describes how all three systems contribute simultaneously depending on exercise <strong>intensity</strong> and <strong>duration</strong>.</p>
+                        <p class="mt-2"><strong>Invasion Games (e.g. Football/Rugby):</strong> Aerobic system predominant during walking/jogging; ATP-PC system used for explosive sprints/tackles; Lactate system used during sustained high-tempo counter-attacks.</p>
+                    </div>
+
+                    <div class="bg-slate-50 p-4 rounded-xl border border-slate-300">
+                        <span class="font-extrabold text-btec-blue text-sm block mb-2">Long-Term Training Adaptations</span>
+                        <ul class="list-disc pl-4 space-y-1 text-slate-700">
+                            <li>Increased ATP and Phosphocreatine (PC) sarcoplasmic stores.</li>
+                            <li>Increased anaerobic glycolytic enzyme activity (PFK, Creatine Kinase).</li>
+                            <li>Increased mitochondrial density & aerobic enzyme activity (SDH).</li>
+                            <li>Increased glycogen and triglyceride stores in muscle.</li>
+                            <li>Delayed OBLA (Onset of Blood Lactate Accumulation) threshold.</li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Distinction Exam Question -->
+                <div class="bg-btec-goldlight border-2 border-btec-gold p-5 rounded-2xl space-y-3">
+                    <div class="flex items-center justify-between">
+                        <h4 class="font-extrabold text-slate-900 text-sm">
+                            <i class="fas fa-pen-nib text-btec-gold mr-1"></i> Exam Practice (AO3 Distinction Question - 6 Marks)
+                        </h4>
+                        <span class="bg-btec-gold text-btec-darkblue text-xs font-black px-2 py-0.5 rounded uppercase">6 Marks</span>
+                    </div>
+                    <p class="text-xs text-slate-800 leading-relaxed">
+                        <strong>Question:</strong> <em>Detail the 3 stages of Aerobic Respiration: 1. Aerobic Glycolysis (Sarcoplasm), 2. Krebs Cycle (Mitochondrial Matrix), 3. Electron Transport Chain (Cristae). Explain substrate breakdown and total ATP yield.</em>
+                    </p>
+                    <div class="lined-area p-3 rounded-xl border border-amber-300 bg-white">
+                        <textarea id="ch5-exam-ans" oninput="saveAnswer('ch5-exam-ans')" rows="7" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Structure answer: 1. Aerobic Glycolysis converting glucose to Pyruvic acid yielding 2 ATP... 2. Pyruvate converted to Acetyl-CoA entering Krebs cycle producing CO2, 2 ATP, and H+ ions... 3. Electron Transport Chain combining H+ with O2 to form H2O and 32-34 ATP (Total yield = 36-38 ATP)..."></textarea>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- ========================================================================= -->
+        <!-- CHAPTER 6: AO5 SYNOPTIC MASTERCLASS & EXAM BUILDER -->
+        <!-- ========================================================================= -->
+        <div id="content-ch6" class="tab-content hidden space-y-8">
+            <div class="print-page-header">
+                <span>Unit 1: Anatomy & Physiology — Master Learner Workbook</span>
+                <span>AO5 Synoptic Interrelationships Masterclass</span>
+            </div>
+
+            <div class="bg-gradient-to-r from-amber-600 to-btec-gold text-white p-6 rounded-2xl shadow-md flex justify-between items-center">
+                <div class="flex items-center gap-3">
+                    <span class="bg-white/20 p-3 rounded-xl"><i class="fas fa-crown text-3xl text-white"></i></span>
+                    <div>
+                        <h2 class="text-2xl font-black">AO5 Synoptic Interrelationships Masterclass</h2>
+                        <p class="text-amber-100 text-xs sm:text-sm">Targeting Distinction Distinction* Top Marks (8-Mark Extended Synoptic Questions)</p>
+                    </div>
+                </div>
+                <span class="text-xs bg-white/20 text-white px-3 py-1.5 rounded-full font-bold">AO5 Highest Weighting</span>
+            </div>
+
+            <!-- AO5 Concept Breakdown -->
+            <div class="bg-amber-50 border-2 border-btec-gold p-5 rounded-2xl space-y-3 text-xs">
+                <h3 class="font-extrabold text-btec-darkblue text-base flex items-center gap-2">
+                    <i class="fas fa-project-diagram text-btec-gold"></i> What is Synoptic Interrelationship in Unit 1?
+                </h3>
+                <p class="text-slate-800 leading-relaxed">
+                    AO5 requires candidates to demonstrate how multiple body systems interact simultaneously during exercise. Top marks are awarded when you explicitly link changes in one system (e.g. respiratory gas exchange) directly to physiological mechanisms in another (e.g. vascular shunting and muscular ATP synthesis).
+                </p>
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-3">
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-300">
+                        <strong class="text-btec-blue block">Muscular $\leftrightarrow$ Vascular</strong>
+                        Pre-capillary sphincter dilation driven by muscular metabolic waste ($H^+$ / $\text{CO}_2$).
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-300">
+                        <strong class="text-btec-blue block">Cardiovascular $\leftrightarrow$ Respiratory</strong>
+                        Right ventricle pumps deoxygenated blood to pulmonary capillaries for alveolar diffusion.
+                    </div>
+                    <div class="bg-white p-2.5 rounded-lg border border-amber-300">
+                        <strong class="text-btec-blue block">Energy Systems $\leftrightarrow$ All Systems</strong>
+                        Oxygen delivery determines shift from anaerobic lactate accumulation to aerobic electron transport.
+                    </div>
+                </div>
+            </div>
+
+            <!-- Synoptic Task 1 (8 Marks) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-4">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="bg-btec-gold text-btec-darkblue text-xs font-black px-2.5 py-1 rounded uppercase">Synoptic Task 1</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">Cardiovascular, Respiratory & Energy Systems Interaction</h3>
+                    </div>
+                    <span class="text-xs font-bold text-btec-gold bg-amber-50 px-3 py-1 rounded-full border border-amber-300">AO5 — 8 Marks</span>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-800 leading-relaxed">
+                    <strong>Question:</strong> <em>Evaluate how long-term adaptations of the respiratory system (e.g. increased alveolar capillarisation) and cardiovascular system (e.g. cardiac hypertrophy, elevated stroke volume) combine to maximize $\text{VO}_2\text{ Max}$ and delay OBLA in an elite endurance road cyclist.</em>
+                </p>
+
+                <!-- Interactive Keyword Checker -->
+                <div class="p-3 bg-slate-50 rounded-xl border border-slate-200 text-xs space-y-1">
+                    <span class="font-bold text-btec-blue block mb-1"><i class="fas fa-check-circle"></i> Examiner Essential Keywords Checklist:</span>
+                    <div class="flex flex-wrap gap-2 text-[11px]">
+                        <span class="bg-white px-2 py-1 rounded border border-slate-300 font-semibold text-slate-700">Cardiac Hypertrophy</span>
+                        <span class="bg-white px-2 py-1 rounded border border-slate-300 font-semibold text-slate-700">Stroke Volume ($SV$)</span>
+                        <span class="bg-white px-2 py-1 rounded border border-slate-300 font-semibold text-slate-700">Alveolar Diffusion</span>
+                        <span class="bg-white px-2 py-1 rounded border border-slate-300 font-semibold text-slate-700">$\text{VO}_2\text{ Max}$</span>
+                        <span class="bg-white px-2 py-1 rounded border border-slate-300 font-semibold text-slate-700">OBLA ($4\,\text{mmol/L}$)</span>
+                        <span class="bg-white px-2 py-1 rounded border border-slate-300 font-semibold text-slate-700">Mitochondrial Density</span>
+                    </div>
+                </div>
+
+                <div class="lined-area p-3 rounded-xl border border-slate-300 bg-slate-50">
+                    <textarea id="synoptic-1" oninput="saveAnswer('synoptic-1')" rows="10" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Structure response: 1. Define VO2 Max and OBLA. 2. Respiratory adaptations (alveolar diffusion & vital capacity). 3. Cardiovascular adaptations (Q = SV x HR & left ventricular hypertrophy). 4. Combined synoptic effect on delaying anaerobic fatigue in cycling..."></textarea>
+                </div>
+            </div>
+
+            <!-- Synoptic Task 2 (8 Marks) -->
+            <div class="bg-white p-6 rounded-2xl shadow-sm border border-slate-300 space-y-4">
+                <div class="flex justify-between items-start">
+                    <div>
+                        <span class="bg-btec-gold text-btec-darkblue text-xs font-black px-2.5 py-1 rounded uppercase">Synoptic Task 2</span>
+                        <h3 class="text-lg font-bold text-slate-900 mt-1">Muscular, Vascular & Thermoregulation Interrelationships</h3>
+                    </div>
+                    <span class="text-xs font-bold text-btec-gold bg-amber-50 px-3 py-1 rounded-full border border-amber-300">AO5 — 8 Marks</span>
+                </div>
+
+                <p class="text-xs sm:text-sm text-slate-800 leading-relaxed">
+                    <strong>Question:</strong> <em>Analyse the physiological events during the final $5\,\text{km}$ of a marathon in hot conditions. Explain how thermoregulation, vascular shunting, cardiovascular drift, motor unit recruitment, and glycogen depletion interact to cause physiological fatigue.</em>
+                </p>
+
+                <div class="lined-area p-3 rounded-xl border border-slate-300 bg-slate-50">
+                    <textarea id="synoptic-2" oninput="saveAnswer('synoptic-2')" rows="10" class="w-full lined-paper border-none bg-transparent text-sm" placeholder="Discuss glycogen depletion forcing shift to beta-oxidation of fats... Sweating causing plasma loss and decreased stroke volume (Cardiovascular drift)... Vasodilation to skin capillaries for thermoregulation reducing active muscle blood flow... Fatigue in Type I slow oxidative fibers forcing recruitment of less efficient Type IIa motor units..."></textarea>
+                </div>
+            </div>
+        </div>
+
+    </main>
+
+    <!-- Footer -->
+    <footer class="bg-slate-900 text-slate-400 py-6 border-t border-slate-800 no-print mt-auto">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 text-center text-xs space-y-2">
+            <p class="text-slate-300 font-semibold">Pearson BTEC Level 3 National Extended Diploma in Sport — Unit 1 Master Workbook</p>
+            <p>© Interactive Learning Resources | Auto-saving enabled for digital revision.</p>
+        </div>
+    </footer>
+
+    <!-- Logic Script -->
+    <script>
+        let printModeActive = false;
+
+        function toggleAllChaptersForPrint() {
+            printModeActive = !printModeActive;
+            const contents = document.querySelectorAll('.tab-content');
+            const btnText = document.getElementById('print-mode-text');
+
+            if (printModeActive) {
+                contents.forEach(content => content.classList.remove('hidden'));
+                btnText.textContent = "Switch Back to Single Tab View";
+            } else {
+                contents.forEach((content, idx) => {
+                    if (idx !== 0) content.classList.add('hidden');
+                    else content.classList.remove('hidden');
+                });
+                btnText.textContent = "Show All Chapters for Print";
+            }
+        }
+
+        function switchTab(tabId) {
+            if (printModeActive) {
+                toggleAllChaptersForPrint();
+            }
+
+            const contents = document.querySelectorAll('.tab-content');
+            contents.forEach(content => content.classList.add('hidden'));
+
+            const buttons = document.querySelectorAll('.tab-btn');
+            buttons.forEach(btn => {
+                btn.classList.remove('active');
+                btn.classList.add('text-slate-700');
+            });
+
+            const targetContent = document.getElementById('content-' + tabId);
+            if (targetContent) {
+                targetContent.classList.remove('hidden');
+            }
+
+            const targetBtn = document.getElementById('tab-' + tabId);
+            if (targetBtn) {
+                targetBtn.classList.add('active');
+                targetBtn.classList.remove('text-slate-700');
+            }
+
+            window.scrollTo({ top: 120, behavior: 'smooth' });
+        }
+
+        function saveAnswer(id) {
+            const el = document.getElementById(id);
+            if (el) {
+                localStorage.setItem('btec_unit1_master_' + id, el.value);
+            }
+        }
+
+        function saveStudentInfo() {
+            const name = document.getElementById('student-name').value;
+            const tutor = document.getElementById('tutor-name').value;
+            const grade = document.getElementById('target-grade').value;
+
+            localStorage.setItem('btec_unit1_master_name', name);
+            localStorage.setItem('btec_unit1_master_tutor', tutor);
+            localStorage.setItem('btec_unit1_master_grade', grade);
+
+            document.getElementById('grade-badge').textContent = grade ? grade : 'Target Not Set';
+        }
+
+        function loadSavedData() {
+            const inputs = document.querySelectorAll('textarea, input[type="text"], select');
+            inputs.forEach(input => {
+                if (input.id) {
+                    const savedVal = localStorage.getItem('btec_unit1_master_' + input.id);
+                    if (savedVal !== null) {
+                        input.value = savedVal;
+                    }
+                }
+            });
+
+            const name = localStorage.getItem('btec_unit1_master_name');
+            const tutor = localStorage.getItem('btec_unit1_master_tutor');
+            const grade = localStorage.getItem('btec_unit1_master_grade');
+
+            if (name) document.getElementById('student-name').value = name;
+            if (tutor) document.getElementById('tutor-name').value = tutor;
+            if (grade) {
+                document.getElementById('target-grade').value = grade;
+                document.getElementById('grade-badge').textContent = grade;
+            }
+        }
+
+        function clearWorkbook() {
+            if (confirm("Clear all saved workbook answers? This will reset all input fields.")) {
+                Object.keys(localStorage).forEach(key => {
+                    if (key.startsWith('btec_unit1_master_')) {
+                        localStorage.removeItem(key);
+                    }
+                });
+                location.reload();
+            }
+        }
+
+        function exportAnswers() {
+            const studentName = document.getElementById('student-name').value || 'Student';
+            let exportData = `===================================================\n`;
+            exportData += `BTEC LEVEL 3 SPORT - UNIT 1 ANATOMY & PHYSIOLOGY MASTER WORKBOOK\n`;
+            exportData += `Learner Name: ${studentName}\n`;
+            exportData += `Date: ${new Date().toLocaleDateString()}\n`;
+            exportData += `===================================================\n\n`;
+
+            const textareas = document.querySelectorAll('textarea');
+            textareas.forEach((ta, idx) => {
+                const parent = ta.closest('.bg-white, .bg-btec-goldlight');
+                const title = parent ? (parent.querySelector('h3, h4, label')?.innerText || `Question ${idx+1}`) : `Question ${idx+1}`;
+                exportData += `--- ${title} ---\n`;
+                exportData += `${ta.value || '[No answer supplied]'}\n\n`;
+            });
+
+            const blob = new Blob([exportData], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = `BTEC_Unit1_MasterWorkbook_${studentName.replace(/\s+/g, '_')}.txt`;
+            a.click();
+            URL.revokeObjectURL(url);
+        }
+
+        window.onload = function() {
+            loadSavedData();
+        };
+    </script>
+</body>
+</html>
